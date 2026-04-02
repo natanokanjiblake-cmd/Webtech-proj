@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Filipino Recipes</title>
+
+<style>
+:root {
+  --adobo-brown: #5d4037;
+  --turmeric-yellow: #fbc02d;
+  --banana-leaf: #2e7d32;
+  --kangkong-green: #66bb6a;
+  --coconut-cream: #fff3e0;
+  --grill-orange: #ef6c00;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  text-align: center;  
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--coconut-cream);
+}
+
+/* NAVBAR */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background-color: #f44336;
+  color: white;
+}
+
+.navbar h1 {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.8rem;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+}
+
+.navbar ul li {
+  margin-left: 1rem;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #fff;
+  font-weight: 500;
+}
+
+.navbar a:hover {
+  color: #ffd700;
+}
+
+.menu-toggle {
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* 🔥 HERO BANNER WITH IMAGE */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+
+  width: 100%;
+  min-height: 90vh;
+  padding: 4rem 2rem;
+
+  border-radius: 1.5rem;
+  overflow: hidden;
+
+  background: 
+    linear-gradient(
+      rgba(124, 45, 18, 0.7), 
+      rgba(154, 52, 18, 0.6), 
+      rgba(120, 53, 15, 0.7)
+    ),
+    url("https://images.unsplash.com/photo-1604908554027-1b5f38c0b7c5?auto=format&fit=crop&w=1600&q=80");
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+/* Content layer */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
+
+  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  border-radius: 20px;
+}
+
+/* Text */
+.hero h1 {
+  font-size: 3.5rem;
+  font-weight: 800;
+  color: white;
+  margin-bottom: 1rem;
+  text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
+}
+
+.hero p {
+  font-size: 1.4rem;
+  color: #ffe0b2;
+  margin-bottom: 2rem;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.6);
+}
+
+/* Button */
+.hero a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  padding: 12px 25px;
+  background: linear-gradient(to right, #fb923c, #fbbf24);
+  color: #451a03;
+
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+
+  transition: all 0.3s ease;
+}
+
+.hero a:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #fdba74, #fcd34d);
+}
+
+/* Decorative blur circles */
+.hero .decorative-1,
+.hero .decorative-2 {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(3rem);
+  z-index: 1;
+}
+
+.hero .decorative-1 {
+  top: 2rem;
+  left: 2rem;
+  width: 5rem;
+  height: 5rem;
+  background: rgba(251, 146, 60, 0.3);
+}
+
+.hero .decorative-2 {
+  bottom: 2rem;
+  right: 2rem;
+  width: 8rem;
+  height: 8rem;
+  background: rgba(252, 211, 77, 0.3);
+}
+
+/* CARDS */
+.card {
+  width: 250px;
+  background-color: #fff3e0;
+  border-radius: 15px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  margin-bottom: 15px;
+  color: #bf360c;
+}
+
+.card button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #ff7043;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #e64a19;
+}
+
+/* TABS */
+.tabbed-section {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 20px;
+}
+
+.tab-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  border-bottom: 3px solid var(--banana-leaf);
+  justify-content: center;
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  background: var(--grill-orange);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.tab-content-container {
+  background: white;
+  border-radius: 20px;
+  padding: 20px;
+}
+
+.tab-pane {
+  display: none;
+}
+
+.tab-pane.active-pane {
+  display: block;
+}
+
+/* GRID */
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.recipe-card {
+  background: #f8f9fa;
+  padding: 15px;
+  border-radius: 15px;
+  text-align: center;
+}
+
+.view-btn {
+  background: var(--turmeric-yellow);
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+/* CONTACT */
+.contact {
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+.contact form {
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.contact input,
+.contact textarea {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+.contact button {
+  background-color: #ff6f00;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+}
+
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 1.5rem;
+  background-color: #d84315;
+  color: white;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .navbar ul {
+    display: none;
+    flex-direction: column;
+  }
+
+  .navbar ul.active {
+    display: flex;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .hero p {
+    font-size: 1.1rem;
+  }
+}
+</style>
+</head>
+
+<body>
+
+ <section class="hero">
+  <img src="c:\Users\henry\Downloads\main file\banner image.jpg" class="hero-img">
+
+  <div class="hero-content">
+    <h1>Pinoy Recipe Hub</h1>
+    <p>Cook Delicious Filipino Dishes Anytime</p>
+    <a href="#recipes">Explore Recipes</a>
+  </div>
+</section>
+
+<section class="tabbed-section">
+
+  <div class="tab-buttons">
+    <button class="tab-btn active" data-tab="tab1">Savory Classics</button>
+    <button class="tab-btn" data-tab="tab2">Pastry Delights</button>
+    <button class="tab-btn" data-tab="tab3">Dessert Favorites</button>
+    <button class="tab-btn" data-tab="tab4">Nourishing Bites</button>
+  </div>
+
+  <div class="tab-content-container">
+
+    <div class="tab-pane active-pane" id="tab1">
+      <div class="recipe-grid">
+        <div class="recipe-card"><h4>Chicken Adobo</h4><button class="view-btn" data-recipe="adobo">View Recipe</button></div>
+        <div class="recipe-card"><h4>Pork Sinigang</h4><button class="view-btn" data-recipe="sinigang">View Recipe</button></div>
+        <div class="recipe-card"><h4>Pork Menudo</h4><button class="view-btn" data-recipe="menudo">View Recipe</button></div>
+        <div class="recipe-card"><h4>Tortang Talong</h4><button class="view-btn" data-recipe="talong">View Recipe</button></div>
+        <div class="recipe-card"><h4>Paksiw na Isda</h4><button class="view-btn" data-recipe="isda">View Recipe</button></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab2">
+      <div class="recipe-grid">
+        <div class="recipe-card"><h4>Pandesal</h4><button class="view-btn" data-recipe="pandesal">View Recipe</button></div>
+        <div class="recipe-card"><h4>Ensaymada</h4><button class="view-btn" data-recipe="ensaymada">View Recipe</button></div>
+        <div class="recipe-card"><h4>Buko Pie</h4><button class="view-btn" data-recipe="bukopie">View Recipe</button></div>
+        <div class="recipe-card"><h4>Mamon</h4><button class="view-btn" data-recipe="mamon">View Recipe</button></div>
+        <div class="recipe-card"><h4>Spanish Bread</h4><button class="view-btn" data-recipe="spanishbread">View Recipe</button></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab3">
+      <div class="recipe-grid">
+        <div class="recipe-card"><h4>Leche Flan</h4><button class="view-btn" data-recipe="lecheflan">View Recipe</button></div>
+        <div class="recipe-card"><h4>Halo-Halo</h4><button class="view-btn" data-recipe="halohalo">View Recipe</button></div>
+        <div class="recipe-card"><h4>Kutsinta</h4><button class="view-btn" data-recipe="kutsinta">View Recipe</button></div>
+        <div class="recipe-card"><h4>Buko Pandan</h4><button class="view-btn" data-recipe="bukopandan">View Recipe</button></div>
+        <div class="recipe-card"><h4>Polvoron</h4><button class="view-btn" data-recipe="polvoron">View Recipe</button></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" id="tab4">
+      <div class="recipe-grid">
+        <div class="recipe-card"><h4>Cucumber and Tomato salad</h4><button class="view-btn" data-recipe="cucumberandtomamtosalad">View Recipe</button></div>
+        <div class="recipe-card"><h4>Oatmeal with banana</h4><button class="view-btn" data-recipe="oatmealandbanana">View Recipe</button></div>
+        <div class="recipe-card"><h4>Boiled egg salad</h4><button class="view-btn" data-recipe="boiledeggsalad">View Recipe</button></div>
+        <div class="recipe-card"><h4>fresh Fruit salad</h4><button class="view-btn" data-recipe="freshfruitsalad">View Recipe</button></div>
+        <div class="recipe-card"><h4>steamed fish with ginger</h4><button class="view-btn" data-recipe="steamedfishwithginger">View Recipe</button></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="recipe-details">
+  <h2>Recipe Details</h2>
+  <p id="details">Click a recipe to view details.</p>
+</section>
+
+<section id="contact" class="contact">
+  <h2>Contact Us</h2>
+  <form onsubmit="return validateForm()">
+    <input type="text" id="name" placeholder="Your Name">
+    <input type="email" id="email" placeholder="Your Email">
+    <textarea id="message" placeholder="Message"></textarea>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+</main>
+
+<footer>
+  <p>© 2026 RecipeHub | Web Technology Project</p>
+</footer>
+
+<script>
+const tabBtns = document.querySelectorAll('.tab-btn');
+const panes = document.querySelectorAll('.tab-pane');
+
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    panes.forEach(p => p.classList.remove('active-pane'));
+    document.getElementById(btn.dataset.tab).classList.add('active-pane');
+    tabBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  });
+});
+
+const recipeLibrary = {
+  adobo : " <b>PORK ADOBO RECIPE</b><br><br><b>Ingredients:</b><br>1/2 kg chicken/pork<br> 1/4 cup soy sauce<br> 1/4 cup vinegar<br> 4 cloves garlic<br> 2 bay leaves<br> 1 tsp peppercorns<br> 1 cup water<br> 1 tsp oil.<br><br><b>Instructions:</b><br>1. Marinate(optional but better).<br> 2. Mix chicken + soy sauce + galic. Let it sit for 20-30 minutes.<br> 3. Start cooking: Put the chicken (with marinate) in a pot.<br> Add water, bay leaves, and peppercorns.<br> 4. Boil: bring to a boil in medium heat. <br> 5. Simmer: lower heat, cover, and cook for 15-20 minutes.<br> 6. Add vinegar: Pour vinegar in and do not stir for 2-3 minutes.<br> 7. Finish: stir and simmer until the sauce thickens and oil appears on top.<br>  8.Serve with steamed rice.",
+
+  sinigang: " <b>PORK SINIGANG RECIPE</b><br><br><b>Ingredients:</b><br>1/2 kg pork ribs<br>  1 tomato<br>  1 onion<br> 1 pack sinigang mix<br>  radish<br>  kangkong<br>  eggplant<br>  4-5 cups water<br>  fish sauce.<br><br><b>Instructions:</b><br>1. Boil pork: put pork, onion, and tomato in water. Bring to a boil.<br>  2. Remove foam: skim off impurities that float on top.<br> 3. Simmer: cook for 30-40 minutes until pork is tender.<br>  4. Add souring agent: add sinigang mix and stir.<br>  5. Add vegetables: First: radish, eggplant (cook 5-7 mins)<br>  Last: kangkong (1-2 mins only).<br>  6. Season: add fish sauce to taste.<br>  7. Taste check: Adjust sourness or saltiness.<br>  8. Then serve in a bowl.",
+
+  menudo: " <b>PORK MENUDO RECIPE</b><br><br><b>Ingredients:</b><br>1/2 kg pork<br>  1/2 cup liver<br>  2 potatoes<br>  1 carrot<br>  1 cup tomato sauce<br>  garlic<br>  onion<br>  1 tbsp soy sauce.<br><br><b>Instructions:</b><br>1. Cook garlic and onion.<br>  2. Add pork and cook until slighty brown.<br>  3. Add soy sauce and tomato sauce.<br>  4. Add water and cook for 20  minutes.<br>  5. Put potatoes and carrots, and cook until soft.<br>  6. add last to avoid over cooking.<br>  7. Adjust salt and sauce thickness.<br>  8. Serve to the table.",
+
+  talong : " <b>TORTANG TALONG RECIPE</b><br><br><b>Ingredients:</b><br>Eggplant<br>  2 eggs<br>  salt<br><br><b>Instructions:</b><br>1. Grill eggplant.<br>  2. Grill or boil until soft.<br>  3. peel skin.<br>  4. keep stem intact.<br>  5. Gently flatten with fork.<br>  6. Coat with bitten egg.<br>  7. Fry both sides until golden and serve.",
+
+  isda : " <b>PAKSIW NA ISDA RECIPE</b><br><br><b>Ingredients:</b><br>1/2kg fish<br> 1/2 cup vinegar<br>  1/2 cup water<br>  4 cloves garlic<br>  1 thumb ginger<br>  1 eggplant<br>  salt.<br><br><b>Instructions:</b><br>1. Arrange fish in a pot.<br>  2. Add vinegar, water, garlic, and ginger.<br>  3. bring to a boil without stirring.<br>  4. Lower heat and simmer.<br>  5. Add eggplant and cook until soft.<br>  6. Season with salt and serve.",
+
+  pandesal: " <b>PANDESAL</b><br><br><b>Ingredients:</b><br>3 1/2 cups all-purpose flour.<br>1/2 cup sugar.<br> 1 tsp salt.<br> 2 1/4 tsp active dry yeast.<br> 1 cup warm milk.<br> 1/2 cup butter (softened).<br><br><br><b>Instructions:</b><br>1. Dissolve the yeast in warm milk with 1 tsp sugar. Let sit for 5-10 minutes.<br> 2. Mix flour, sugar, and salt ina bowl.<br> 3. Add yeast mixture and butter. Knead until dough is smooth and elastic.<br> 4. Let dough rise in a warm place for 1 hour.<br> 5. Divide dough into small ball. Roll in breadcrumbs and place on baking tray.<br> 6. Let rise for another 30 minutes.<br> 7. Bake at 375°F (190°C) for 15–20 minutes until golden brown.<br> ",
+
+  ensaymada: " <b>ENSAYMADA</b><br><br><b>Ingredients:</b><br>2 cups all-purpose flour.<br>1/4 cup sugar.<br>1/2 tsp salt.<br>1 tsp yeast.<br>1/2 cup warm milk.<br>1/4 cup butter, softened.<br>2 egg yolks.<br>Extra butter and grated cheese for topping.<br><br><br><b>Instructions:</b><br>1. Dissolve yeast in warm milk with a teaspoon of sugar; let it sit for 5–10 minutes until bubbly.<br> 2. In a bowl, combine flour, sugar, and salt.<br> 3. Add yeast mixture, butter, and egg yolks. Knead until smooth and elastic.<br> 4. Cover dough and let it rise for 1–2 hours until doubled in size.<br> 5. Divide dough into small balls, place in greased pans, and let rise again for 30 minutes.<br> 6. Bake at 350°F (175°C) for 15–20 minutes until lightly golden.<br> 7. Brush with butter and sprinkle grated cheese on top before serving.",
+
+  bukopie: " <b>BUKO PIE</b><br><br><b>Ingredients:</b><br>2 cups all-purpose flour<br>1/2 cup butter (cold, cubed)<br>1/4 cup sugar<br>1/4 cup cold water<br>2 cups young coconut meat, chopped<br>1 cup condensed milk<br>.<br><br><b>Instructions:</b><br>1. Mix flour and butter until crumbly. Add sugar and water to form dough.<br> 2. Roll out dough for the bottom crust and place in pie pan.<br> 3. Mix coconut meat with condensed milk and pour over crust.<br> 4. Roll out top crust, cover pie, and seal edges.<br> 5. Bake at 375°F (190°C) for 30–35 minutes until crust is golden.<br> 6. Cool before slicing.",
+
+  mamon: " <b>MAMON</b><br><br><b>Ingredients:</b><br>1 cup all-purpose flour.<br>1/2 cup sugar.<br>4 egg yolks.<br>4 egg whites<br>1/4 cup butter, melted<br>1 tsp vanilla extract<br><br><br><b>Instructions:</b><br>1. Preheat oven to 350°F (175°C).<br> 2.Beat egg yolks with half the sugar until light. Add melted butter and vanilla.<br> 3. Beat egg whites until stiff peaks form, gradually adding remaining sugar.<br> 4. Fold egg whites into yolk mixture carefully.<br> 5. Sift flour and fold gently into batter.<br> 6. Pour into greased muffin pans or small molds.<br> 7. Bake for 15–20 minutes until a toothpick comes out clean.",
+
+  spanishbread: " <b>SPANISH BREAD</b><br><br><b>Ingredients:</b><br>3 cups all-purpose flour<br>1/4 cup sugar<br>1 tsp salt<br>2 1/4 tsp yeast<br>1/2 cup warm milk<br>1/4 cup butter, softened<br>1 egg<br>Breadcrumbs for coating<br>Butter and sugar for filling<br><br><b>Instructions:</b><br>1. Dissolve yeast in warm milk with a teaspoon of sugar. Let it sit until bubbly.<br> 2. Mix flour, sugar, and salt. Add yeast mixture, butter, and egg. Knead until smooth.<br> 3. Let dough rise for 1–2 hours until doubled.<br> 4. Divide dough into small pieces, roll out, spread butter and sugar filling, then roll into logs.<br> 5. Coat with breadcrumbs.<br> 6. Let rise for 30 minutes.<br> 7. Bake at 350°F (175°C) for 15–20 minutes until golden brown.",
+
+  lecheflan: " <b>LECHE FLAN</b><br><br><b>Ingredients:</b><br>10 egg yolks.<br>1 can (14 oz) sweetened condensed milk.<br>1 can (12 oz) evaporated milk.<br>1 tsp vanilla extract.<br>1 cup sugar (for caramel).<br><br><br><b>Instructions:</b><br>1. In a saucepan, melt sugar over medium heat until it turns golden brown. Pour into a flan mold or small ramekins.<br> 2. In a bowl, combine egg yolks, condensed milk, evaporated milk, and vanilla. Mix gently.<br> 3. Pour mixture over caramel in mold.<br> 4. Cover with foil and steam over medium heat for 30–40 minutes until set.<br> 5. Let cool, then refrigerate for at least 2 hours before serving.",
+
+  halohalo: " <b>HALO-HALO</b><br><br><b>Ingredients:</b><br>1/2 cup sweetened red beans.<br>1/2 cup sweetened jackfruit, sliced.<br>1/2 cup sweetened saba bananas, sliced.<br>1/2 cup shaved ice.<br>1/4 cup evaporated milk.<br>1 scoop of ice cream (optional).<br>Pinch of purple yam (ube) jam.<br><br><b>Instructions:</b><br>1. In a tall glass, layer sweetened beans, jackfruit, and saba.<br> 2. Add shaved ice on top of the fruits.<br> 3. Pour evaporated milk over ice.<br> 4. Top with ice cream and a small spoon of ube jam.<br> 5. Mix before eating.",
+
+  kutsinta: " <b>KUTSINTA</b><br><br><b>Ingredients:</b><br>1 cup rice flour.<br>1/2 cup brown sugar.<br>1 1/2 cups water.<br>1 tsp lye water.<br>Grated coconut (for topping).<br><br><b>Instructions:</b><br>1. Mix rice flour, brown sugar, water, and lye water until smooth.<br> 2. Pour into small molds or muffin cups.<br> 3. Steam for 20–25 minutes until firm.<br> 4. Let cool slightly, then top with grated coconut before serving.",
+
+  bukopandan: " <b>BUKO PANDAN</b><br><br><b>Ingredients:</b><br>2 cups young coconut meat, shredded.<br>1 pack pandan-flavored gelatin.<br>1 can sweetened condensed milk.<br>1 cup heavy cream or all-purpose cream.<br><br><b>Instructions:</b><br>1. Prepare pandan gelatin according to package instructions. Let it set and cut into cubes.<br> 2. In a bowl, combine shredded coconut, pandan cubes, condensed milk, and cream.<br> 3. Mix gently until all ingredients are combined.<br> 4. Chill in the refrigerator for at least 1 hour before serving.",
+
+  polvoron: " <b>POLVORON</b><br><br><b>Ingredients:</b><br>2 cups toasted all-purpose flour.<br>1 cup powdered milk.<br>3/4 cup sugar.<br>1/2 cup butter, melted.<br>Optional: crushed nuts.<br><br><b>Instructions:</b><br>1. In a bowl, combine toasted flour, powdered milk, and sugar.<br> 2. Add melted butter and mix until crumbly but holds shape when pressed.<br> 3. Press mixture into molds or shape into small discs.<br> 4. Let cool completely before wrapping in cellophane.",
+
+  cucumberandtomamtosalad : " <b>CUCUMBER AND TOMATO SALAD</b><br><br><b>Ingredients:</b><br>1 cucumber.<br>1 tomato.<br>1 tbsp vinegar or calamansi juice.<br>Pinch of salt.<br><br><b>Instructions:</b><br>1. Slice cucumber and tomato.<br> 2. Place in bowl.<br> 3. Add vinegar or calamansi juice.<br> 4. Sprinkle salt.<br> 5. Mix and serve fresh.",
+
+  oatmealandbanana : " <b>OATMEAL WITH BANANA</b><br><br><b>Ingredients:</b><br>1/2 cup oats.<br>1 cup milk or water.<br>1 banana (sliced)<br><br><b>Instructions:</b><br>1. Bring milk or water to a boil.<br> 2. Add oats and stir.<br> 3. Cook for 3–5 minutes until thick.<br> 4. Add sliced banana on top.<br> 5. Serve warm.",
+
+  boiledeggsalad : " <b>BOILED EGG SALAD</b><br><br><b>Ingredients:</b><br>2 boiled eggs, sliced.<br>1 cup lettuce, chopped.<br>1 tomato, diced.<br>1-2 tsp yogurt or light mayo<br><br><b>Instructions:</b><br>1.  Arrange lettuce and tomato in a bowl.<br> 2. Top with sliced boiled eggs.<br> 3. Add yogurt or light mayo and toss lightly.<br> 4. Serve immediately.",
+
+  freshfruitsalad : " <b>FRESH FRUIT SALAD</b><br><br><b>Ingredients:</b><br>1 apple, diced.<br>1 banana, sliced.<br>1/2 cup papaya, diced.<br>1/2 cup low-fat yogurt<br><br><b>Instructions:</b><br>1. Combine all fruits in a bowl.<br> 2. Pour yogurt over the fruits and mix gently.<br> 3. Chill in the fridge for 15 minutes before serving.",
+
+  steamedfishwithginger: "<b>STEAMED FISH WITH GiNGER</b><br><br><b>Ingredients:</b><br>1 fish fillet (tilapia or bangus).<br>1 thumb ginger, julienned.<br>1 clove garlic, minced.<br>Salt and pepper.<br>Lemon juice<br><br><b>Instructions:</b><br>1. Season fish with salt, pepper, and lemon juice.<br> 2. Place fish on a steamer basket with ginger and garlic on top.<br> 3. Steam for 10–15 minutes until fully cooked.<br> 4. Serve with steamed vegetables or rice."
+};
+
+document.querySelectorAll('.view-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.getElementById('details').innerHTML = recipeLibrary[btn.dataset.recipe];
+  });
+});
+</script>
+
+</body>
+</html>
